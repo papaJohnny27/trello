@@ -1,0 +1,15 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/trello
+    username: postgres
+    password: eldos
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+
+
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
