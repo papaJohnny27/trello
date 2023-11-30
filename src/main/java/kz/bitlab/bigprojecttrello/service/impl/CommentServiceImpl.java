@@ -1,6 +1,7 @@
 package kz.bitlab.bigprojecttrello.service.impl;
 
 import kz.bitlab.bigprojecttrello.dto.CommentDto;
+import kz.bitlab.bigprojecttrello.mapper.CommentMapper;
 import kz.bitlab.bigprojecttrello.model.Comment;
 import kz.bitlab.bigprojecttrello.model.Task;
 import kz.bitlab.bigprojecttrello.repository.CommentRepository;
@@ -17,18 +18,18 @@ import java.util.stream.Collectors;
 public class CommentServiceImpl implements CommentService {
     private final CommentRepository commentRepository;
     private final TaskRepository taskRepository;
+    private final CommentMapper commentMapper;
 
     @Override
     public List<CommentDto> getByTaskId(Long taskId) {
-        return commentRepository.findAllByTaskId(taskId).stream()
-                .map(comment -> new CommentDto(comment.getId(), comment.getComment()))
-                .collect(Collectors.toList());
+        return commentMapper.toDtos(commentRepository.findAllByTaskId(taskId));
     }
 
     @Override
     public void create(Long taskId, CommentDto commentDto) {
         Task task = taskRepository.findById(taskId).orElseThrow();
-        commentRepository.save(new Comment(null, commentDto.getComment(), task));
+        Comment comment = commentMapper.toEntity(commentDto, task);
+        commentRepository.save(comment);
     }
 
     @Override

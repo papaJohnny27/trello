@@ -19,32 +19,32 @@ import java.util.stream.Collectors;
 public class FolderServiceImpl implements FolderService {
 
     private final FolderRepository folderRepository;
+    private final FolderMapper folderMapper;
 
     @Override
     public List<FolderDto> getAll() {
-        List<Folder> folders = folderRepository.findAll();
-
-        return FolderMapper.toDtos(folders);
+        final List<Folder> folders = folderRepository.findAll();
+        return folderMapper.toDtos(folders);
     }
 
     @Override
     public FolderDto getById(Long id) {
         return folderRepository.findById(id)
-                .map(FolderMapper::toDto)
+                .map(folderMapper::toDto)
                 .orElseThrow();
 
     }
 
     @Override
-    public void create(FolderDto foldersDto) {
-        folderRepository.save(FolderMapper.toEntity(foldersDto));
+    public void create(FolderDto folderDto) {
+        folderRepository.save(folderMapper.toEntity(folderDto));
     }
 
     @Override
-    public void update(Long id, FolderDto foldersDto) {
+    public void update(Long id, FolderDto folderDto) {
         Folder folder = folderRepository.findById(id).orElseThrow();
-        folder.setName(foldersDto.getName());
-        folder.setCategories(foldersDto.getCategories().stream()
+        folder.setName(folderDto.getName());
+        folder.setCategories(folderDto.getCategories().stream()
                 .map(category -> new TaskCategory(category.getId(), category.getName(), new HashSet<>())).collect(Collectors.toSet()));
 
         folderRepository.save(folder);

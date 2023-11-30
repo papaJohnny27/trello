@@ -9,7 +9,7 @@ public interface FolderService {
 
     FolderDto getById(Long id);
 
-    void create(FolderDto foldersDto);
+    void create(FolderDto folderDto);
 
 
     void update(Long id, FolderDto folderDto);
