@@ -1,9 +1,9 @@
 package kz.bitlab.bigprojecttrello.repository;
 
-import kz.bitlab.bigprojecttrello.model.TaskCategories;
+import kz.bitlab.bigprojecttrello.model.TaskCategory;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface TaskCategoriesRepository extends JpaRepository<TaskCategories,Long> {
+public interface TaskCategoryRepository extends JpaRepository<TaskCategory,Long> {
 }

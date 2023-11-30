@@ -1,5 +1,6 @@
 package kz.bitlab.bigprojecttrello.dto;
 
+import kz.bitlab.bigprojecttrello.model.TaskStatus;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -7,7 +8,10 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CommentsDto {
+public class TaskDto {
     private Long id;
-    private String comment;
+    private String title;
+    private String description;
+    private TaskStatus status;
+
 }

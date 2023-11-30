@@ -15,10 +15,10 @@ import java.util.Set;
 @NoArgsConstructor
 @Getter
 @Setter
+public class Task {
 
-public class Tasks {
     @Id
-    @GeneratedValue(strategy= GenerationType.SEQUENCE, generator="tasks_seq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "tasks_seq")
     @SequenceGenerator(name = "tasks_seq", sequenceName = "task_id_seq", allocationSize = 1)
     Long id;
     String title;
@@ -28,8 +28,8 @@ public class Tasks {
 
     @ManyToOne
     @JoinColumn(name = "folder_id")
-    private Folders folder;
+    private Folder folder;
 
     @OneToMany(mappedBy = "task")
-    private Set<Comments> comments = new HashSet<>();
+    private Set<Comment> comments = new HashSet<>();
 }

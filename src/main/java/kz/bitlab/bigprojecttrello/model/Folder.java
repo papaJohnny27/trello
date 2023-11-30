@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -16,9 +15,9 @@ import java.util.Set;
 @NoArgsConstructor
 @Getter
 @Setter
-public class Folders {
+public class Folder {
     @Id
-    @GeneratedValue(strategy= GenerationType.SEQUENCE, generator="folder_seq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "folder_seq")
     @SequenceGenerator(name = "folder_seq", sequenceName = "folder_id_seq", allocationSize = 1)
     private Long id;
     private String name;
@@ -28,7 +27,7 @@ public class Folders {
             joinColumns = {@JoinColumn(name = "folder_id")},
             inverseJoinColumns = {@JoinColumn(name = "task_category_id")}
     )
-    private Set<TaskCategories> categories = new HashSet<>();
+    private Set<TaskCategory> categories = new HashSet<>();
     @OneToMany(mappedBy = "folder")
-    private Set<Tasks> tasks = new HashSet<>();
+    private Set<Task> tasks = new HashSet<>();
 }
